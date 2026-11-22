@@ -16,7 +16,7 @@
       <LLMSettings v-model:llmParams="llmParams" @reset="resetSettings" />
     </div>
 
-    <UDivider orientation="vertical" class="hidden md:block" />
+    <hr class="border-border mx-4 hidden md:block" />
 
     <div class="flex-grow md:w-2/3 lg:w-3/4">
       <ChatPanel
