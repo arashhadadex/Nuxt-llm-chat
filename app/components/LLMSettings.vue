@@ -39,9 +39,10 @@ const models = [
 
 <template>
   <div class="h-full flex flex-col overflow-hidden">
-    <UDivider />
+    <hr class="border-border my-4" />
     <div class="p-4 flex-1 space-y-6 overflow-y-auto">
-      <UFormGroup label="Model">
+      <div class="space-y-2">
+        <label class="text-sm font-medium text-muted-foreground">Model</label>
         <USelectMenu
           v-model="llmParams.model"
           size="md"
@@ -49,7 +50,7 @@ const models = [
           value-attribute="id"
           option-attribute="name"
         />
-      </UFormGroup>
+      </div>
 
       <RangeInput
         v-model="llmParams.temperature"
@@ -66,17 +67,18 @@ const models = [
         :max="4096"
       />
 
-      <UFormGroup label="System Prompt">
+      <div class="space-y-2">
+        <label class="text-sm font-medium text-muted-foreground">System Prompt</label>
         <UTextarea
           v-model="llmParams.systemPrompt"
           :rows="3"
           :maxrows="8"
           autoresize
         />
-      </UFormGroup>
+      </div>
 
       <div class="flex items-center justify-between">
-        <span>Stream Response</span>
+        <span class="text-sm">Stream Response</span>
         <UToggle v-model="llmParams.stream" />
       </div>
 
