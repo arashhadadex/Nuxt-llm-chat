@@ -1,0 +1,95 @@
+type ChatMessage = {
+  role: 'user' | 'assistant'
+  content: string
+}
+
+type LlmParams = {
+  model: string
+  temperature: number
+  maxTokens: number
+  topP?: number
+  topK?: number
+  frequencyPenalty?: number
+  presencePenalty?: number
+  systemPrompt: string
+  stream: boolean
+}
+
+export function useChat() {
+  async function* streamResponse(
+    url: string,
+    messages: ChatMessage[],
+    llmParams: LlmParams
+  ) {
+    let buffer = ''
+
+    try {
+      const response = await $fetch<ReadableStream>(url, {
+        method: 'POST',
+        body: {
+          messages,
+          params: llmParams,
+        },
+        responseType: 'stream',
+      })
+
+      const reader = response.pipeThrough(new TextDecoderStream()).getReader()
+
+      while (true) {
+        const { value, done } = await reader.read()
+
+        if (done) {
+          if (buffer.trim()) {
+            console.warn('Stream ended with unparsed data:', buffer)
+          }
+          return
+        }
+
+        buffer += value
+        const lines = buffer.split('\n')
+        buffer = lines.pop() || ''
+
+        for (const line of lines) {
+          if (line.startsWith('data: ')) {
+            const data = line.slice('data: '.length).trim()
+            if (data === '[DONE]') {
+              return
+            }
+
+            try {
+              const jsonData = JSON.parse(data)
+              if (jsonData.response) {
+                yield jsonData.response
+              }
+            } catch (parseError) {
+              console.warn('Error parsing JSON:', parseError)
+            }
+          }
+        }
+      }
+    } catch (error) {
+      console.error('Error sending message:', error)
+      throw error
+    }
+  }
+
+  async function getResponse(
+    url: string,
+    messages: ChatMessage[],
+    llmParams: LlmParams
+  ) {
+    const result = await $fetch(url, {
+      method: 'POST',
+      body: {
+        messages,
+        params: llmParams,
+      },
+    })
+    return result
+  }
+
+  return {
+    getResponse,
+    streamResponse,
+  }
+}

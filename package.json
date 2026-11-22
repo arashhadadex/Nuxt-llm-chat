@@ -1,0 +1,58 @@
+{
+  "name": "cf-playground",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "npx nuxthub preview",
+    "deploy": "npx nuxthub deploy",
+    "postinstall": "nuxt prepare",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@nuxt/eslint": "^1.4.1",
+    "@nuxt/ui": "4.13.0",
+    "@nuxthub/core": "^0.9.0",
+    "@tiptap/core": "^3.35.0",
+    "@tiptap/extension-bubble-menu": "^3.35.0",
+    "@tiptap/extension-code": "^3.35.0",
+    "@tiptap/extension-collaboration": "^3.35.0",
+    "@tiptap/extension-drag-handle": "^3.35.0",
+    "@tiptap/extension-drag-handle-vue-3": "^3.35.0",
+    "@tiptap/extension-floating-menu": "^3.35.0",
+    "@tiptap/extension-horizontal-rule": "^3.35.0",
+    "@tiptap/extension-image": "^3.35.0",
+    "@tiptap/extension-mention": "^3.35.0",
+    "@tiptap/extension-node-range": "^3.35.0",
+    "@tiptap/extension-placeholder": "^3.35.0",
+    "@tiptap/markdown": "^3.35.0",
+    "@tiptap/pm": "^3.35.0",
+    "@tiptap/starter-kit": "^3.35.0",
+    "@tiptap/suggestion": "^3.35.0",
+    "@tiptap/vue-3": "^3.35.0",
+    "nuxt": "^4.6.4",
+    "tailwindcss": "^4.3.5",
+    "vue": "^3.5.16",
+    "vue-router": "^4.5.1"
+  },
+  "devDependencies": {
+    "@nuxt/eslint-config": "^1.4.1",
+    "@nuxtjs/mdc": "^0.23.4",
+    "eslint": "^9.29.0",
+    "typescript": "^5.8.3",
+    "vue-tsc": "^2.2.10",
+    "wrangler": "^4.20.1"
+  },
+  "packageManager": "pnpm@10.12.1",
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@parcel/watcher",
+      "esbuild",
+      "sharp",
+      "unrs-resolver",
+      "workerd"
+    ]
+  }
+}
