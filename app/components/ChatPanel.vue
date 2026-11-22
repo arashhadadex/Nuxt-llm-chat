@@ -13,7 +13,6 @@
         />
       </div>
       <div class="flex items-center gap-x-4">
-        <ColorMode />
         <UButton
           icon="i-heroicons-cog-6-tooth"
           color="gray"
