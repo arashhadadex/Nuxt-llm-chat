@@ -3,15 +3,14 @@
     <div class="flex items-center justify-between p-4 border-b">
       <div class="flex items-center gap-x-4">
         <h2 class="text-xl md:text-2xl text-primary font-bold">Hub Chat</h2>
-        <UTooltip text="Clear chat">
-          <UButton
-            color="gray"
-            icon="i-heroicons-trash"
-            size="xs"
-            :disabled="clearDisabled"
-            @click="$emit('clear')"
-          />
-        </UTooltip>
+        <UButton
+          color="gray"
+          icon="i-heroicons-trash"
+          size="xs"
+          :disabled="clearDisabled"
+          title="Clear chat"
+          @click="$emit('clear')"
+        />
       </div>
       <div class="flex items-center gap-x-4">
         <ColorMode />
