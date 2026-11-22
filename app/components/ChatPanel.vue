@@ -23,10 +23,18 @@
       </div>
     </div>
 
-    <UserMessageTextbox
+    <ChatsContainer
+      :chat-history="chatHistory"
       :loading="loading"
-      @send="$emit('message', $event)"
+      class="flex-1 overflow-y-auto"
     />
+
+    <div class="border-t border-border p-2 bg-background">
+      <UserMessageTextbox
+        :loading="loading"
+        @send="$emit('message', $event)"
+      />
+    </div>
   </div>
 </template>
 

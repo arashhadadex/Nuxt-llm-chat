@@ -66,8 +66,7 @@ const models = [
         :min="1"
         :max="4096"
       />
-
-      <div class="space-y-2">
+      <div class="space-y-2 mb-6">
         <label class="text-sm font-medium text-muted-foreground">System Prompt</label>
         <UTextarea
           v-model="llmParams.systemPrompt"
