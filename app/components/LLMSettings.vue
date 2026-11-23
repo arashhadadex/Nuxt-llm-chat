@@ -27,10 +27,6 @@ const accordionItems = [
 
 const models = [
   {
-    name: 'deepseek-coder-6.7b-base-awq',
-    id: '@hf/thebloke/deepseek-coder-6.7b-base-awq',
-  },
-  {
     name: 'llama-3-8b-instruct',
     id: '@cf/meta/llama-3-8b-instruct',
   },
