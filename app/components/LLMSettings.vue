@@ -41,7 +41,7 @@ const models = [
   <div class="h-full flex flex-col overflow-hidden">
     <hr class="border-border my-4" />
     <div class="p-4 flex-1 space-y-6 overflow-y-auto">
-      <div class="space-y-2 mb-4">
+      <div class="space-y-4 mb-6">
         <label class="text-sm font-medium text-muted-foreground">Model</label>
         <USelectMenu
           v-model="llmParams.model"
@@ -58,6 +58,7 @@ const models = [
         :min="0"
         :max="5"
         :step="0.1"
+        class="mb-6"
       />
 
       <RangeInput
@@ -65,9 +66,9 @@ const models = [
         label="Max Tokens"
         :min="1"
         :max="4096"
-        class="mb-4"
+        class="mb-6"
       />
-      <div class="space-y-2 mb-6">
+      <div class="space-y-4 mb-6">
         <label class="text-sm font-medium text-muted-foreground">System Prompt</label>
         <UTextarea
           v-model="llmParams.systemPrompt"
