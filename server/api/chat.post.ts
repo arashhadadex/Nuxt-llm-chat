@@ -70,7 +70,7 @@ export default defineEventHandler(async (event) => {
       console.error('Workers AI error:', workersResponse.status, errorText);
       throw createError({
         statusCode: 502,
-        statusMessage: 'Workers AI request failed',
+        statusMessage: `Workers AI request failed: ${errorText}`,
       });
     }
 
@@ -85,9 +85,10 @@ export default defineEventHandler(async (event) => {
     return result.result?.response || '';
   } catch (error) {
     console.error(error);
+    const msg = error instanceof Error ? error.message : String(error);
     throw createError({
       statusCode: 500,
-      statusMessage: 'Error processing request',
+      statusMessage: `Error processing request: ${msg}`,
     });
   }
 });
