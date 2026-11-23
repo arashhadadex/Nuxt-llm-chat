@@ -1,5 +1,25 @@
 import { sendStream } from 'h3';
 
+type CloudflareEnv = {
+  WORKERS_AI_ACCOUNT_ID?: string;
+  WORKERS_AI_API_TOKEN?: string;
+};
+
+function getEnv(ctx: unknown): CloudflareEnv {
+  const eventCtx = ctx as { context?: Record<string, string> } | undefined;
+  const bindings = eventCtx?.context || {};
+  return {
+    WORKERS_AI_ACCOUNT_ID:
+      bindings.WORKERS_AI_ACCOUNT_ID ||
+      process.env.WORKERS_AI_ACCOUNT_ID ||
+      '',
+    WORKERS_AI_API_TOKEN:
+      bindings.WORKERS_AI_API_TOKEN ||
+      process.env.WORKERS_AI_API_TOKEN ||
+      '',
+  };
+}
+
 export default defineEventHandler(async (event) => {
   const { messages, params } = await readBody(event);
   if (!messages || messages.length === 0 || !params) {
@@ -9,9 +29,9 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  const config = useRuntimeConfig();
-  const accountId = config.public.workersAiAccountId as string | undefined;
-  const apiToken = config.workersAiApiToken as string | undefined;
+  const env = getEnv((event as unknown) as { context?: Record<string, string> });
+  const accountId = env.WORKERS_AI_ACCOUNT_ID;
+  const apiToken = env.WORKERS_AI_API_TOKEN;
 
   if (!accountId || !apiToken) {
     throw createError({
