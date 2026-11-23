@@ -1,19 +1,15 @@
-# Hello Edge
+# LLM Chat Playground
 
-A minimal [Nuxt](https://nuxt.com) starter deployed on the Edge using [NuxtHub](https://hub.nuxt.com).
+A minimal Nuxt 4 LLM chat playground deployed on Cloudflare Pages using Workers AI.
 
-https://hello.nuxt.dev
+**Live demo:** https://nuxt-llm-chat.arashhadadsoleymanii.workers.dev
 
-<a href="https://hello.nuxt.dev">
-<img src="https://github.com/nuxt-hub/hello-edge/assets/904724/99d1bd54-ef7e-4ac9-83ad-0a290f85edcf" alt="Hello World template for NuxtHub" />
-</a>
+## Models
 
-## Features
+- `@cf/meta/llama-3.1-8b-instruct`
+- `@cf/meta/llama-3.2-3b-instruct`
 
-- Server-Side rendering on Cloudflare Workers
-- ESLint setup
-- Ready to add a database, blob and KV storage
-- One click deploy on 275+ locations for free
+Other models were removed because they are deprecated or unavailable on this Workers AI account.
 
 ## Setup
 
@@ -21,12 +17,6 @@ Make sure to install the dependencies with [pnpm](https://pnpm.io/installation#u
 
 ```bash
 pnpm install
-```
-
-You can update the main text displayed by creating a `.env`:
-
-```bash
-NUXT_PUBLIC_HELLO_TEXT="Hello my world!"
 ```
 
 ## Development Server
@@ -37,24 +27,28 @@ Start the development server on `http://localhost:3000`:
 pnpm dev
 ```
 
+## Environment Variables
+
+Set these on Cloudflare Pages (Production):
+
+| Variable | Description |
+|---|---|
+| `WORKERS_AI_ACCOUNT_ID` | Your Cloudflare Workers AI account ID |
+| `WORKERS_AI_API_TOKEN` | Your Cloudflare Workers AI API token |
+
 ## Production
 
-Build the application for production:
+Build the application:
 
 ```bash
 pnpm build
 ```
 
-## Deploy
+The site deploys automatically to Cloudflare Pages on push to `main`.
 
+## Tech Stack
 
-Deploy the application on the Edge with [NuxtHub](https://hub.nuxt.com) on your Cloudflare account:
-
-```bash
-npx nuxthub deploy
-```
-
-Then checkout your server logs, analaytics and more in the [NuxtHub Admin](https://admin.hub.nuxt.com).
-
-You can also deploy using [Cloudflare Pages CI](https://hub.nuxt.com/docs/getting-started/deploy#cloudflare-pages-ci).
-
+- [Nuxt 4](https://nuxt.com)
+- [Nuxt UI](https://ui.nuxt.com)
+- [@nuxtjs/mdc](https://github.com/nuxt-modules/mdc)
+- Cloudflare Workers AI

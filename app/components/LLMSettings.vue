@@ -41,7 +41,7 @@ const models = [
   <div class="h-full flex flex-col overflow-hidden">
     <hr class="border-border my-4" />
     <div class="p-4 flex-1 space-y-6 overflow-y-auto">
-      <div class="space-y-2">
+      <div class="space-y-2 mb-4">
         <label class="text-sm font-medium text-muted-foreground">Model</label>
         <USelectMenu
           v-model="llmParams.model"
@@ -65,6 +65,7 @@ const models = [
         label="Max Tokens"
         :min="1"
         :max="4096"
+        class="mb-4"
       />
       <div class="space-y-2 mb-6">
         <label class="text-sm font-medium text-muted-foreground">System Prompt</label>
