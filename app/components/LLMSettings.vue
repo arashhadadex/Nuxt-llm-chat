@@ -27,24 +27,12 @@ const accordionItems = [
 
 const models = [
   {
-    name: 'llama-3-8b-instruct',
-    id: '@cf/meta/llama-3-8b-instruct',
-  },
-  {
     name: 'llama-3.1-8b-instruct',
     id: '@cf/meta/llama-3.1-8b-instruct',
   },
   {
     name: 'llama-3.2-3b-instruct',
     id: '@cf/meta/llama-3.2-3b-instruct',
-  },
-  {
-    name: 'mistral-7b-instruct-v0.2',
-    id: '@hf/mistral/mistral-7b-instruct-v0.2',
-  },
-  {
-    name: 'gemma-2-9b-it',
-    id: '@hf/google/gemma-2-9b-it',
   },
 ]
 </script>
