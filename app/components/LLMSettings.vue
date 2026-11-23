@@ -62,9 +62,9 @@ const models = [
         <USelectMenu
           v-model="llmParams.model"
           size="md"
-          :options="models"
-          value-attribute="id"
-          option-attribute="name"
+          :items="models"
+          value-key="id"
+          label-key="name"
         />
       </div>
 
