@@ -22,7 +22,7 @@
       <ChatPanel
         :chat-history="chatHistory"
         :loading="loading"
-        @clear="chatHistory = []"
+      @clear="chatHistory.value = []"
         @message="sendMessage"
         @show-drawer="isDrawerOpen = true"
       />
@@ -31,10 +31,8 @@
 </template>
 
 <script setup lang="ts">
+import { watch } from 'vue';
 import type { ChatMessage, LlmParams, LoadingType } from '~/types';
-
-const isDrawerOpen = ref(false);
-
 const defaultSettings: LlmParams = {
   model: '@cf/meta/llama-3.1-8b-instruct',
   temperature: 0.6,
@@ -51,6 +49,23 @@ const resetSettings = () => {
 const { getResponse, streamResponse } = useChat();
 const chatHistory = ref<ChatMessage[]>([]);
 const loading = ref<LoadingType>('idle');
+
+// Persist chat history so it survives page refreshes
+if (import.meta.client) {
+  const stored = localStorage.getItem('llm-chat-history');
+  if (stored) {
+    try {
+      chatHistory.value = JSON.parse(stored);
+    } catch {
+      // ignore corrupt storage
+    }
+  }
+
+  watch(chatHistory, (val) => {
+    localStorage.setItem('llm-chat-history', JSON.stringify(val));
+  }, { deep: true });
+}
+
 async function sendMessage(message: string) {
   chatHistory.value.push({ role: 'user', content: message });
 
